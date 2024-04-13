@@ -1,3 +1,5 @@
+package Logica;
+
 import java.sql.*;
 
 public class ConsultaDatos {

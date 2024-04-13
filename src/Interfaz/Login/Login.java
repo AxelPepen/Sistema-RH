@@ -1,3 +1,5 @@
+package Interfaz.Login;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -43,8 +45,6 @@ public class Login extends JFrame {
         crearPanelLOGO();
         crearPanelPRINCIPAL();
         crearPanelENTRAR();
-        crearPanelREGISTRARSE();
-        crearPanelCREAR();
         agregarEventos();
         iconos();
         frameConfig();
@@ -151,7 +151,7 @@ public class Login extends JFrame {
         panelENTRARLogin.add(botonENTRAR);
         panelPrincipalLogin.add(panelENTRARLogin);
     }
-    public void crearPanelREGISTRARSE() {
+   /* public void crearPanelREGISTRARSE() {
 
         panelREGISTRARSELogin.setBounds(228, 360, 200, 50);
         panelREGISTRARSELogin.setBackground(new Color(50, 158, 253));
@@ -193,12 +193,12 @@ public class Login extends JFrame {
 
         panelVOLVERLogin.add(botonVOLVER);
         panelPrincipalLogin.add(panelVOLVERLogin);
-    }
+    }*/
     public void frameConfig(){
-        setTitle("Login");
+        setTitle("Interfaz.Login.Login");
         setSize(800, 500);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
 
         setLayout(null);
@@ -257,29 +257,25 @@ public class Login extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(txtNombre.getText().isEmpty() || txtNombre.getText().equals("Ingrese su nombre de usuario") || txtContra.getText().isEmpty() || txtContra.getText().equals("********")) {
                     JOptionPane.showMessageDialog(null, "Llenar todos los campos", "ERROR", JOptionPane.ERROR_MESSAGE);
-                }else {
+                } else {
                     String nombre = txtNombre.getText();
                     String contrasena = String.valueOf(txtContra.getPassword());
 
                     if (verificarCredenciales(nombre, contrasena)) {
-                        PaginaPrincipal paginaPrincipal = new PaginaPrincipal();
                         dispose();
-
                     } else {
                         JOptionPane.showMessageDialog(null, "Usuario inexistente", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
                         txtNombre.setText("");
                         txtContra.setText("");
-
                     }
                 }
 
-                limpiar();
 
             }
         });
 
 
-        panelREGISTRARSELogin.addMouseListener(new MouseAdapter() {
+      /*  panelREGISTRARSELogin.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 panelREGISTRARSELogin.setBackground(new Color(0, 139, 207));
@@ -351,7 +347,7 @@ public class Login extends JFrame {
                 panelPrincipalLogin.repaint();
 
             }
-        });
+        });*/
 
     }
     public boolean verificarCredenciales(String nombre, String contrasena) {
@@ -383,7 +379,9 @@ public class Login extends JFrame {
 
         return credencialesValidas;
     }
-    public void insertarUsuario(String nombre, String contrasena) {
+
+
+   /* public void insertarUsuario(String nombre, String contrasena) {
         Connection conexion = null;
         PreparedStatement statement = null;
 
@@ -412,7 +410,7 @@ public class Login extends JFrame {
             }
 
     }
-
+*/
 
     public void iconos(){
         ImageIcon imageIcon1 = new ImageIcon("D:\\logo.png");
@@ -422,9 +420,14 @@ public class Login extends JFrame {
         imagen1.setBounds(70, 40, 200, 200);
         panelLogoLogin.add(imagen1);
     }
-
-
-    public static void main(String[] args) {
-        Login login = new Login();
+    public String getNombreUsuario() {
+        return txtNombre.getText();
     }
+
+    // Método para obtener la contraseña ingresada
+    public String getContrasena() {
+        return String.valueOf(txtContra.getPassword());
+    }
+
+
 }
